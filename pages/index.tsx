@@ -8,12 +8,13 @@ export default function Home({ repos, languages }) {
   return (
     <div className={styles.container}>
       <Head>
+        <meta name="description" content="Alex Lavallee's Coding Portfolio" />
         <title>Github Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>The Portfolio</h1>
+        <h2 className={styles.title}>The Portfolio</h2>
 
         <div className={styles.grid}>
           {repos.map((repo, index) => (

@@ -903,6 +903,11 @@
   resolved "https://registry.yarnpkg.com/@bugsnag/safe-json-stringify/-/safe-json-stringify-6.0.0.tgz#22abdcd83e008c369902976730c34c150148a758"
   integrity sha512-htzFO1Zc57S8kgdRK9mLcPVTW1BY2ijfH7Dk2CeZmspTWKdKqSo1iwmqrq2WtRjFlo8aRZYgLX0wFrDXF/9DLA==
 
+"@corex/deepmerge@^2.5.3":
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-2.5.6.tgz#a5d26c6a0f4df1f65d17871c94f463d5097e349a"
+  integrity sha512-zvClQyrUGV4Hzr2zWnyD/MS0DrNWJ9jMKFLYA/abmsU4dObMuFXhragGqWpWHW6G/ghJpf09E+JumTo5jSb9rg==
+
 "@dabh/diagnostics@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@dabh/diagnostics/-/diagnostics-2.0.2.tgz#290d08f7b381b8f94607dc8f471a12c675f9db31"
@@ -6633,6 +6638,13 @@ marked@^2.0.1:
   resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.1.tgz#5e7ed7009bfa5c95182e4eb696f85e948cefcee3"
   integrity sha512-5+/fKgMv2hARmMW7DOpykr2iLhl0NgjyELk5yn92iE7z8Se1IS9n3UsFm86hFXIkvMBmVxki8+ckcpjBeyo/hw==
 
+matcher@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/matcher/-/matcher-4.0.0.tgz#a42a05a09aaed92e2d241eb91fddac689461ea51"
+  integrity sha512-S6x5wmcDmsDRRU/c2dkccDwQPXoFczc5+HpQ2lON8pnvHlnvHAHj5WlLVvw6n6vNyHuVugYrFohYxbS+pvFpKQ==
+  dependencies:
+    escape-string-regexp "^4.0.0"
+
 maxstache-stream@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/maxstache-stream/-/maxstache-stream-1.0.4.tgz#9c7f5cab7e5fdd2d90da86143b4e9631ea328040"
@@ -7105,6 +7117,15 @@ netlify@^6.1.16:
     tempy "^0.3.0"
     through2-filter "^3.0.0"
     through2-map "^3.0.0"
+
+next-sitemap@^1.5.18:
+  version "1.5.18"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-1.5.18.tgz#53ba27feefc0021e29baa518db898c31cd94030d"
+  integrity sha512-YLLd2cfmO2fvLmoeA2KHBkHwhw5Oc/ybf2MS6pa1M+YJSPNvTla26TMRhVLvbNbyGAyS1eHNguEK/uGWxQ5x3A==
+  dependencies:
+    "@corex/deepmerge" "^2.5.3"
+    matcher "^4.0.0"
+    minimist "^1.2.5"
 
 next@10.0.9:
   version "10.0.9"
