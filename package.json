@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "next build && next-sitemap && next export && netlify deploy --prod -d=out"
+    "deploy": "next build && next export"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "dotenv-safe": "^8.2.0",
     "fs": "^0.0.1-security",
     "marked": "^2.0.1",
