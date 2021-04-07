@@ -33,7 +33,7 @@ export default function Home({ repos, languages }) {
           </CardContent>
           <CardActions>
             <Button size="small" href={`/repo/${repo.name}`}>
-              Learn More
+              View Repository Info
             </Button>
           </CardActions>
         </Card>
