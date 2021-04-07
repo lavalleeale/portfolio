@@ -1,14 +1,16 @@
-import Head from "next/head";
-import PropTypes from "prop-types";
 import {
-  Card,
-  Typography,
-  CardContent,
-  CardActions,
   Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+  Typography,
 } from "@material-ui/core";
+import Head from "next/head";
+import { FormEvent, useState } from "react";
 
-export default function Home({ repos, languages }) {
+export default function Home() {
+  const [user, setUser] = useState("");
   return (
     <div>
       <Head>
@@ -17,63 +19,44 @@ export default function Home({ repos, languages }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {repos.map((repo, index) => (
-        <Card key={repo.id} style={{ margin: 10, padding: 10 }}>
+      <Card style={{ margin: 10, padding: 10 }}>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            Alex Lavallee
+          </Typography>
+          <Typography color="textSecondary">Example Portfolio</Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" href="/lavalleeale/repos">
+            View Example Portfolio
+          </Button>
+        </CardActions>
+      </Card>
+      <Card style={{ margin: 10, padding: 10 }}>
+        <form
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+            window.location.replace(`/${user}/repos`);
+            return false;
+          }}
+        >
           <CardContent>
             <Typography variant="h5" component="h2">
-              {repo.name}
+              View Your Own
             </Typography>
-            <Typography color="textSecondary">
-              {Object.keys(languages[index]).slice(0, 3).join(", ")}
-            </Typography>
-            {/* <Typography variant="body2" component="p">
-                well meaning and kindly.
-                <br />a benevolent smile
-              </Typography> */}
+            <TextField
+              placeholder="Github Username"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            />
           </CardContent>
           <CardActions>
-            <Button size="small" href={`/repo/${repo.name}`}>
-              View Repository Info
+            <Button size="small" href={`/${user}/repos`} type="submit">
+              View Your Portfolio
             </Button>
           </CardActions>
-        </Card>
-      ))}
+        </form>
+      </Card>
     </div>
   );
 }
-export async function getStaticProps() {
-  const repos = await (
-    await fetch("https://api.github.com/users/lavalleeale/repos", {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        Authorization: `Token ${process.env.PAT}`,
-      },
-    })
-  ).json();
-  const languages = await Promise.all(
-    repos.map(async (repo) =>
-      (
-        await fetch(repo.languages_url, {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-            Authorization: `Token ${process.env.PAT}`,
-          },
-        })
-      ).json()
-    )
-  );
-  return {
-    props: { repos, languages }, // will be passed to the page component as props
-  };
-}
-
-Home.propTypes = {
-  repos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      language: PropTypes.string,
-    })
-  ).isRequired,
-  languages: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)).isRequired,
-};

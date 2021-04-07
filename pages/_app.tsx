@@ -6,6 +6,7 @@ import {
   ThemeProvider,
   Toolbar,
   Typography,
+  Link,
 } from "@material-ui/core";
 import type { AppProps } from "next/app";
 
@@ -20,7 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3">The Portfolio</Typography>
+          <Typography variant="h3">
+            <Link href="/" color="inherit" style={{ textDecoration: "none" }}>
+              Github Portfolio Generator
+            </Link>
+          </Typography>
         </Toolbar>
       </AppBar>
       <CssBaseline />
