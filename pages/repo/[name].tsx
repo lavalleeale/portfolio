@@ -22,13 +22,22 @@ const id = ({ repo, readme, languages }) => (
       </Typography>
       <Typography>
         Homepage:{" "}
-        {repo.homepage ? <a href={repo.homepage}>{repo.homepage}</a> : "None"}
+        {repo.homepage ? (
+          <Link color="textPrimary" href={repo.homepage}>
+            {repo.homepage}
+          </Link>
+        ) : (
+          "None"
+        )}
       </Typography>
       <Typography>
         Last Modified: {new Date(repo.updated_at).toDateString()}
       </Typography>
       <Typography>
-        Link: <Link href={repo.html_url}>{repo.html_url}</Link>
+        Link:{" "}
+        <Link color="textPrimary" href={repo.html_url}>
+          {repo.html_url}
+        </Link>
       </Typography>
       {/* eslint-disable-next-line react/no-danger */}
       <div dangerouslySetInnerHTML={{ __html: readme }} />
