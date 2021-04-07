@@ -1,34 +1,43 @@
 import Head from "next/head";
 import PropTypes from "prop-types";
-import styles from "../styles/Home.module.css";
-
-// require("dotenv-safe").config();
+import {
+  Card,
+  Typography,
+  CardContent,
+  CardActions,
+  Button,
+} from "@material-ui/core";
 
 export default function Home({ repos, languages }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <meta name="description" content="Alex Lavallee's Coding Portfolio" />
         <title>Github Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h2 className={styles.title}>The Portfolio</h2>
-
-        <div className={styles.grid}>
-          {repos.map((repo, index) => (
-            <a
-              key={repo.id}
-              className={styles.cardwithhover}
-              href={`/repo/${repo.name}`}
-            >
-              <h3>{repo.name}</h3>
-              <p>{Object.keys(languages[index]).slice(0, 3).join(", ")}</p>
-            </a>
-          ))}
-        </div>
-      </main>
+      {repos.map((repo, index) => (
+        <Card key={repo.id} style={{ margin: 10, padding: 10 }}>
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {repo.name}
+            </Typography>
+            <Typography color="textSecondary">
+              {Object.keys(languages[index]).slice(0, 3).join(", ")}
+            </Typography>
+            {/* <Typography variant="body2" component="p">
+                well meaning and kindly.
+                <br />a benevolent smile
+              </Typography> */}
+          </CardContent>
+          <CardActions>
+            <Button size="small" href={`/repo/${repo.name}`}>
+              Learn More
+            </Button>
+          </CardActions>
+        </Card>
+      ))}
     </div>
   );
 }

@@ -1,30 +1,38 @@
+import { Button, Paper, Link, Typography } from "@material-ui/core";
 import marked from "marked";
 import Head from "next/head";
-import styles from "../../styles/Home.module.css";
 
 const id = ({ repo, readme, languages }) => (
-  <div className={styles.card}>
+  <div>
     <Head>
       <meta name="description" content={`Alex Lavallee's ${repo.name}`} />
       <title>{repo.name}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <a href="/" className={styles.card} style={{ marginLeft: "0px" }}>
-      <h3 style={{ display: "inline" }}>&#60; BACK</h3>
-    </a>
-    <p style={{ marginTop: 25 }}>Name: {repo.name}</p>
-    <p>Language: {Object.keys(languages).slice(0, 3).join(", ")}</p>
-    <p>License: {repo.license ? repo.license.name : "None"}</p>
-    <p>
-      Homepage:{" "}
-      {repo.homepage ? <a href={repo.homepage}>{repo.homepage}</a> : "None"}
-    </p>
-    <p>Last Modified: {new Date(repo.updated_at).toDateString()}</p>
-    <p>
-      Link: <a href={repo.html_url}>{repo.html_url}</a>
-    </p>
-    {/* eslint-disable-next-line react/no-danger */}
-    <div dangerouslySetInnerHTML={{ __html: readme }} />
+    <Paper style={{ margin: 10, padding: 10 }}>
+      <Button href="/" style={{ marginTop: 10 }}>
+        &#60; BACK
+      </Button>
+      <Typography>Name: {repo.name}</Typography>
+      <Typography>
+        Language: {Object.keys(languages).slice(0, 3).join(", ")}
+      </Typography>
+      <Typography>
+        License: {repo.license ? repo.license.name : "None"}
+      </Typography>
+      <Typography>
+        Homepage:{" "}
+        {repo.homepage ? <a href={repo.homepage}>{repo.homepage}</a> : "None"}
+      </Typography>
+      <Typography>
+        Last Modified: {new Date(repo.updated_at).toDateString()}
+      </Typography>
+      <Typography>
+        Link: <Link href={repo.html_url}>{repo.html_url}</Link>
+      </Typography>
+      {/* eslint-disable-next-line react/no-danger */}
+      <div dangerouslySetInnerHTML={{ __html: readme }} />
+    </Paper>
   </div>
 );
 
