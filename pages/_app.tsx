@@ -8,19 +8,29 @@ import {
   Typography,
 } from "@material-ui/core";
 import type { AppProps } from "next/app";
+import useDarkMode from "use-dark-mode";
 
-const theme = createMuiTheme({
+const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
   },
 });
+const lightTheme = createMuiTheme({
+  palette: {
+    type: "light",
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { value } = useDarkMode(false, { storageKey: null, onChange: null });
+  const theme = value ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3">The Portfolio</Typography>
+          <Typography variant="h3">
+            Alexander Lavallee&apos;s Portfolio
+          </Typography>
         </Toolbar>
       </AppBar>
       <CssBaseline />
