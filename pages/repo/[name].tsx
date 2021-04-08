@@ -10,9 +10,7 @@ const id = ({ repo, readme, languages }) => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Paper style={{ margin: 10, padding: 10 }}>
-      <Button href="/" style={{ marginTop: 10 }}>
-        &#60; BACK
-      </Button>
+      <Button href="/">&#60; BACK</Button>
       <Typography>Name: {repo.name}</Typography>
       <Typography>
         Language: {Object.keys(languages).slice(0, 3).join(", ")}

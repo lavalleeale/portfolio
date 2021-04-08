@@ -3,6 +3,7 @@ import {
   AppBar,
   createMuiTheme,
   CssBaseline,
+  Link,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h3">
-            Alexander Lavallee&apos;s Portfolio
+            <Link href="/" color="inherit" style={{ textDecoration: "none" }}>
+              Alexander Lavallee&apos;s Portfolio
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -39,17 +42,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-
-//   return { ...appProps }
-// }
 
 export default MyApp;
