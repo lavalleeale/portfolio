@@ -1,5 +1,4 @@
 import { Button, Paper, Link, Typography } from "@material-ui/core";
-import marked from "marked";
 import Head from "next/head";
 
 const id = ({ repo, readme, languages }) => (
@@ -79,16 +78,25 @@ export async function getStaticProps(context) {
       },
     })
   ).json();
-  const readme: string = marked(
-    await (
-      await fetch(readmeData.download_url, {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          Authorization: `Token ${process.env.PAT}`,
-        },
-      })
-    ).text()
-  );
+  const readme = await (
+    await fetch("https://api.github.com/markdown", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Accept: "application/vnd.github.v3+json",
+      },
+      body: JSON.stringify({
+        text: await (
+          await fetch(readmeData.download_url, {
+            headers: {
+              Accept: "application/vnd.github.v3+json",
+              Authorization: `Token ${process.env.PAT}`,
+            },
+          })
+        ).text(),
+      }),
+    })
+  ).text();
   const languages = await (
     await fetch(repo.languages_url, {
       headers: {
