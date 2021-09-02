@@ -51,7 +51,8 @@ export default function Home({ repos, languages, name }) {
   );
 }
 export async function getStaticProps() {
-  const { name, login } = await (
+  const repos_urls = [];
+  const { name, login, organizations_url, repos_url } = await (
     await fetch("https://api.github.com/user", {
       headers: {
         Accept: "application/vnd.github.v3+json",
@@ -59,17 +60,50 @@ export async function getStaticProps() {
       },
     })
   ).json();
-
-  const repos = (
+  repos_urls.push({ login, repos_url });
+  const orgs = (
     await (
-      await fetch("https://api.github.com/user/repos", {
+      await fetch(organizations_url, {
         headers: {
           Accept: "application/vnd.github.v3+json",
           Authorization: `Token ${process.env.PAT}`,
         },
       })
     ).json()
-  ).filter((repo) => repo.owner.login === login && !repo.private);
+  ).map((org) =>
+    repos_urls.push({ login: org.login, repos_url: org.repos_url })
+  );
+
+  const repos = (
+    await Promise.all<
+      {
+        private: boolean;
+        owner: { login: string };
+        languages_url: string;
+        id: number;
+        name: string;
+      }[]
+    >(
+      await Promise.all(
+        repos_urls.map(async ({ repos_url }) => {
+          return (
+            await fetch(repos_url, {
+              headers: {
+                Accept: "application/vnd.github.v3+json",
+                Authorization: `Token ${process.env.PAT}`,
+              },
+            })
+          ).json();
+        })
+      )
+    )
+  )
+    .map((repos_lists, index) =>
+      repos_lists.filter(
+        (repo) => repo.owner.login === repos_urls[index].login && !repo.private
+      )
+    )
+    .flat();
 
   const languages = await Promise.all(
     repos.map(async (repo) =>
