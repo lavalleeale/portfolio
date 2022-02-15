@@ -1,14 +1,7 @@
-import {
-  AppBar,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Link,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+/* eslint-disable camelcase */
+import { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import PropTypes from "prop-types";
 
 export default function Home({ repos, languages, name }) {
@@ -17,42 +10,27 @@ export default function Home({ repos, languages, name }) {
       <Head>
         <meta name="description" content={`${name}'s Coding Portfolio`} />
         <title>Github Portfolio</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h3">
-            <Link href="/" color="inherit" style={{ textDecoration: "none" }}>
-              {name}&apos;s Portfolio
-            </Link>
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-
       {repos.map((repo, index) => (
-        <Card key={repo.id} style={{ margin: 10, padding: 10 }}>
-          <CardContent>
-            <Typography variant="h5" component="h2">
-              {repo.name}
-            </Typography>
-            <Typography color="textSecondary">
-              {Object.keys(languages[index]).slice(0, 3).join(", ")}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" href={`/repo/${repo.name}`}>
-              View Repository Info
-            </Button>
-          </CardActions>
-        </Card>
+        <div key={repo.id} className="paper">
+          <h5 className="text-xl">{repo.name}</h5>
+          <p color="textSecondary">
+            Languages: {Object.keys(languages[index]).slice(0, 3).join(", ")}
+          </p>
+          <Link href={`/repo/${repo.name}`}>View Repository Info</Link>
+        </div>
       ))}
     </div>
   );
 }
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const repos_urls = [];
-  const { name, login, organizations_url, repos_url } = await (
+  const {
+    name,
+    login,
+    organizations_url,
+    repos_url: selfReposUrl,
+  } = await (
     await fetch("https://api.github.com/user", {
       headers: {
         Accept: "application/vnd.github.v3+json",
@@ -60,8 +38,8 @@ export async function getStaticProps() {
       },
     })
   ).json();
-  repos_urls.push({ login, repos_url });
-  const orgs = (
+  repos_urls.push({ login, repos_url: selfReposUrl });
+  (
     await (
       await fetch(organizations_url, {
         headers: {
@@ -82,19 +60,19 @@ export async function getStaticProps() {
         languages_url: string;
         id: number;
         name: string;
-      }[]
+      }[][]
     >(
       await Promise.all(
-        repos_urls.map(async ({ repos_url }) => {
-          return (
+        repos_urls.map(async ({ repos_url }) =>
+          (
             await fetch(repos_url, {
               headers: {
                 Accept: "application/vnd.github.v3+json",
                 Authorization: `Token ${process.env.PAT}`,
               },
             })
-          ).json();
-        })
+          ).json()
+        )
       )
     )
   )
@@ -123,9 +101,14 @@ export async function getStaticProps() {
       repos: repos.map((repo) => ({ id: repo.id, name: repo.name })),
       languages,
       name,
-    }, // will be passed to the page component as props
+    },
+    revalidate: 10 * 60 * 60,
   };
-}
+};
+
+export const config = {
+  unstable_runtimeJS: false,
+};
 
 Home.propTypes = {
   repos: PropTypes.arrayOf(

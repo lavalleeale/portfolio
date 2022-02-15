@@ -1,67 +1,71 @@
-import {
-  Button,
-  Paper,
-  Link,
-  Typography,
-  AppBar,
-  Toolbar,
-} from "@material-ui/core";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
-const id = ({ repo, readme, languages, name }) => (
+const id = ({
+  repo,
+  readme,
+  languages,
+  name,
+}: {
+  repo: {
+    name: string;
+    license?: { name: string };
+    homepage: string;
+    html_url: string;
+    updated_at: number;
+  };
+  languages: { [key: string]: number };
+  readme: string;
+  name: string;
+}) => (
   <div>
     <Head>
       <meta name="description" content={`${name}'s ${repo.name}`} />
       <title>{repo.name}</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
-    <AppBar position="fixed">
-      <Toolbar>
-        <Typography variant="h3">
-          <Link href="/" color="inherit" style={{ textDecoration: "none" }}>
-            {name}&apos;s Portfolio
-          </Link>
-        </Typography>
-      </Toolbar>
-    </AppBar>
-    <Toolbar />
-    <Paper style={{ margin: 10, padding: 10 }}>
-      <Button href="/">&#60; BACK</Button>
-      <Typography>Name: {repo.name}</Typography>
-      <Typography>
-        Language: {Object.keys(languages).slice(0, 3).join(", ")}
-      </Typography>
-      <Typography>
-        License: {repo.license ? repo.license.name : "None"}
-      </Typography>
-      <Typography>
+    <div className="paper">
+      <p>Name: {repo.name}</p>
+      <p>
+        Language{Object.keys(languages).length > 1 && "s"}:{" "}
+        {Object.keys(languages)
+          .slice(0, 3)
+          .map(
+            (language) =>
+              `${language}: 
+              (${(
+                (languages[language] /
+                  Object.keys(languages).reduce<number>(
+                    (prev, key) => prev + languages[key],
+                    0
+                  )) *
+                100
+              ).toPrecision(3)}%)`
+          )
+          .join(", ")}
+      </p>
+      <p>License: {repo.license ? repo.license.name : "None"}</p>
+      <p>
         Homepage:{" "}
         {repo.homepage ? (
-          <Link color="textPrimary" href={repo.homepage}>
-            {repo.homepage}
-          </Link>
+          <Link href={repo.homepage}>{repo.homepage}</Link>
         ) : (
           "None"
         )}
-      </Typography>
-      <Typography>
-        Last Modified: {new Date(repo.updated_at).toDateString()}
-      </Typography>
-      <Typography>
-        Link:{" "}
-        <Link color="textPrimary" href={repo.html_url}>
-          {repo.html_url}
-        </Link>
-      </Typography>
+      </p>
+      <p>Last Modified: {new Date(repo.updated_at).toDateString()}</p>
+      <p>
+        Link: <Link href={repo.html_url}>{repo.html_url}</Link>
+      </p>
       {/* eslint-disable-next-line react/no-danger */}
       <div dangerouslySetInnerHTML={{ __html: readme }} />
-    </Paper>
+    </div>
   </div>
 );
 
 export default id;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const { login } = await (
     await fetch("https://api.github.com/user", {
       headers: {
@@ -83,10 +87,10 @@ export async function getStaticPaths() {
   ).filter((repo) => repo.owner.login === login && !repo.private);
   return {
     paths: repos.map((repo) => ({ params: { name: repo.name } })),
-    fallback: false,
+    fallback: "blocking",
   };
-}
-export async function getStaticProps(context) {
+};
+export const getStaticProps: GetStaticProps = async (context) => {
   const { name, login } = await (
     await fetch("https://api.github.com/user", {
       headers: {
@@ -156,5 +160,10 @@ export async function getStaticProps(context) {
       languages,
       name,
     },
+    revalidate: 10 * 60 * 60,
   };
-}
+};
+
+export const config = {
+  unstable_runtimeJS: false,
+};

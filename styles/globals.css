@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.paper {
+  @apply p-2 m-1 rounded-md bg-white border border-gray-300;
+}
