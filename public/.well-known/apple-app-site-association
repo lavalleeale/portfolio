@@ -5,8 +5,8 @@
              "appIDs": [ "2GA3QKMF6Y.com.axlav.watchcord.watchkitapp.watchkitextension" ],
              "components": [
                {
-                  "/": "/flicktype/*",
-                  "comment": "Matches any URL whose path starts with /flicktype/"
+                  "/": "/",
+                  "comment": "Matches /"
                }
              ]
            }
