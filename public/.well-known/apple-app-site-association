@@ -2,7 +2,7 @@
   "applinks": {
       "details": [
            {
-             "appIDs": [ "com.axlav.watchcord.watchkitapp.watchkitextension" ],
+             "appIDs": [ "2GA3QKMF6Y.com.axlav.watchcord.watchkitapp.watchkitextension" ],
              "components": [
                {
                   "/": "/flicktype/*",
