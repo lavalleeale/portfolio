@@ -1,11 +1,12 @@
 {
   "applinks": {
+      "apps": [],
       "details": [
            {
              "appIDs": [ "2GA3QKMF6Y.com.axlav.watchcord.watchkitapp.watchkitextension" ],
              "components": [
                {
-                  "/": "/",
+                  "/": "/*",
                   "comment": "Matches /"
                }
              ]
