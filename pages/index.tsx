@@ -12,13 +12,17 @@ export default function Home({ repos, languages, name }) {
         <title>Github Portfolio</title>
       </Head>
       {repos.map((repo, index) => (
-        <div key={repo.id} className="paper">
-          <h5 className="text-xl">{repo.name}</h5>
-          <p color="textSecondary">
-            Languages: {Object.keys(languages[index]).slice(0, 3).join(", ")}
-          </p>
-          <Link href={`/repo/${repo.name}`}>View Repository Info</Link>
-        </div>
+        <Link href={`/repo/${repo.name}`} key={repo.id}>
+          <a>
+            <div className="paper">
+              <h5 className="text-xl">{repo.name}</h5>
+              <p color="textSecondary">
+                Languages:{" "}
+                {Object.keys(languages[index]).slice(0, 3).join(", ")}
+              </p>
+            </div>
+          </a>
+        </Link>
       ))}
     </div>
   );

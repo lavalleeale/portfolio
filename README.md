@@ -1,5 +1,7 @@
 # Github Portfolio Generator
 
+![Preview](https://github.com/lavalleeale/portfolio/blob/main/preview.png?raw=true)
+
 ## Getting Started
 
 1. Clone repository locally
