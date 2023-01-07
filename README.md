@@ -1,12 +1,6 @@
 # Github Portfolio Generator
 
-## Preview
-
-![Preview](https://github.com/lavalleeale/portfolio/blob/main/preview.png?raw=true)
-
-## What is this?
-
-This is a simple way to automatically generate a portfolio from all of a users public github repos
+<img src="https://github.com/lavalleeale/portfolio/blob/main/preview.png?raw=true" width="500" />
 
 ## Getting Started
 
