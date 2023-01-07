@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import PropTypes from "prop-types";
+import { getInfo } from "../helpers/getInfo";
 
 export default function Home({ repos, languages, name }) {
   return (
@@ -28,67 +29,9 @@ export default function Home({ repos, languages, name }) {
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const repos_urls = [];
-  const {
-    name,
-    login,
-    organizations_url,
-    repos_url: selfReposUrl,
-  } = await (
-    await fetch("https://api.github.com/user", {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        Authorization: `Token ${process.env.PAT}`,
-      },
-    })
-  ).json();
-  repos_urls.push({ login, repos_url: selfReposUrl });
-  (
-    await (
-      await fetch(organizations_url, {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          Authorization: `Token ${process.env.PAT}`,
-        },
-      })
-    ).json()
-  ).map((org) =>
-    repos_urls.push({ login: org.login, repos_url: org.repos_url })
-  );
-
-  const repos = (
-    await Promise.all<
-      {
-        private: boolean;
-        owner: { login: string };
-        languages_url: string;
-        id: number;
-        name: string;
-      }[][]
-    >(
-      await Promise.all(
-        repos_urls.map(async ({ repos_url }) =>
-          (
-            await fetch(repos_url, {
-              headers: {
-                Accept: "application/vnd.github.v3+json",
-                Authorization: `Token ${process.env.PAT}`,
-              },
-            })
-          ).json()
-        )
-      )
-    )
-  )
-    .map((repos_lists, index) =>
-      repos_lists.filter(
-        (repo) => repo.owner.login === repos_urls[index].login && !repo.private
-      )
-    )
-    .flat();
-
+  const info = await getInfo();
   const languages = await Promise.all(
-    repos.map(async (repo) =>
+    info.repos.map(async (repo) =>
       (
         await fetch(repo.languages_url, {
           headers: {
@@ -102,9 +45,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      repos: repos.map((repo) => ({ id: repo.id, name: repo.name })),
+      repos: info.repos.map((repo) => ({ id: repo.id, name: repo.name })),
       languages,
-      name,
+      name: info.name,
     },
     revalidate: 10 * 60 * 60,
   };

@@ -25,7 +25,7 @@ const id = ({
       <title>{repo.name}</title>
     </Head>
     <div className="paper">
-      <p>Name: {repo.name}</p>
+      <h1>Name: {repo.name}</h1>
       <p>
         Language{Object.keys(languages).length > 1 && "s"}:{" "}
         {Object.keys(languages)
@@ -48,14 +48,23 @@ const id = ({
       <p>
         Homepage:{" "}
         {repo.homepage ? (
-          <Link href={repo.homepage}>{repo.homepage}</Link>
+          <Link href={repo.homepage}>
+            <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+              {repo.homepage}
+            </a>
+          </Link>
         ) : (
           "None"
         )}
       </p>
       <p>Last Modified: {new Date(repo.updated_at).toDateString()}</p>
       <p>
-        Link: <Link href={repo.html_url}>{repo.html_url}</Link>
+        Link:{" "}
+        <Link href={repo.html_url}>
+          <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+            {repo.html_url}
+          </a>
+        </Link>
       </p>
       {/* eslint-disable-next-line react/no-danger */}
       <div dangerouslySetInnerHTML={{ __html: readme }} />
