@@ -2,7 +2,11 @@ module.exports = {
   darkMode: false,
   content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        header: "870px",
+      },
+    },
   },
   plugins: [],
 };
