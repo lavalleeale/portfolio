@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 h1 {
-  @apply text-3xl;
+  @apply text-2xl;
 }
 h2 {
-  @apply text-2xl;
+  @apply text-xl;
 }
 .paper {
   @apply p-2 m-1 rounded-md bg-white border border-gray-300;

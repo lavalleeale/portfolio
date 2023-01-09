@@ -2,6 +2,10 @@
 
 <img src="https://github.com/lavalleeale/portfolio/blob/main/preview.png?raw=true" width="500" />
 
+## What is this?
+
+This is a NextJS app that will automatically generate a portfolio website from any users public github repositories
+
 ## Getting Started
 
 1. Clone repository locally

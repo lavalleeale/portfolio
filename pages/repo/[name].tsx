@@ -5,6 +5,7 @@ import Link from "next/link";
 const id = ({
   repo,
   readme,
+  total,
   languages,
   name,
 }: {
@@ -15,6 +16,7 @@ const id = ({
     html_url: string;
     updated_at: number;
   };
+  total: number;
   languages: { [key: string]: number };
   readme: string;
   name: string;
@@ -25,49 +27,51 @@ const id = ({
       <title>{repo.name}</title>
     </Head>
     <div className="paper">
-      <h1>Name: {repo.name}</h1>
-      <p>
-        Language{Object.keys(languages).length > 1 && "s"}:{" "}
+      <h1 className="text-3xl">{repo.name}</h1>
+    </div>
+    <div className="grid sm:grid-cols-4">
+      <div className="paper col-span-3 hidden sm:block">
+        {/* eslint-disable-next-line react/no-danger */}
+        <div dangerouslySetInnerHTML={{ __html: readme }} />
+      </div>
+      <div className="paper">
+        <p className="inline-block mr-1">
+          Language{Object.keys(languages).length > 1 && "s"}:
+        </p>
         {Object.keys(languages)
           .slice(0, 3)
-          .map(
-            (language) =>
-              `${language}: 
-              (${(
-                (languages[language] /
-                  Object.keys(languages).reduce<number>(
-                    (prev, key) => prev + languages[key],
-                    0
-                  )) *
+          .map((language) => (
+            <p key={language} className="inline-block">
+              {`${language}: ${(
+                (languages[language] / total) *
                 100
-              ).toPrecision(3)}%)`
-          )
-          .join(", ")}
-      </p>
-      <p>License: {repo.license ? repo.license.name : "None"}</p>
-      <p>
-        Homepage:{" "}
-        {repo.homepage ? (
-          <Link href={repo.homepage}>
-            <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-              {repo.homepage}
+              ).toPrecision(3)}%`}
+            </p>
+          ))}
+        <p>License: {repo.license ? repo.license.name : "None"}</p>
+        <p>
+          <span className="inline-block mr-1">Homepage: </span>
+          {repo.homepage ? (
+            <Link href={repo.homepage}>
+              <a className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+                {repo.homepage}
+              </a>
+            </Link>
+          ) : (
+            "None"
+          )}
+        </p>
+        <p className="mr-1">Last Modified: </p>{" "}
+        <p>{new Date(repo.updated_at).toDateString()}</p>
+        <p className="">
+          Repository:{" "}
+          <Link href={repo.html_url}>
+            <a className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+              {repo.html_url}
             </a>
           </Link>
-        ) : (
-          "None"
-        )}
-      </p>
-      <p>Last Modified: {new Date(repo.updated_at).toDateString()}</p>
-      <p>
-        Link:{" "}
-        <Link href={repo.html_url}>
-          <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-            {repo.html_url}
-          </a>
-        </Link>
-      </p>
-      {/* eslint-disable-next-line react/no-danger */}
-      <div dangerouslySetInnerHTML={{ __html: readme }} />
+        </p>
+      </div>
     </div>
   </div>
 );
@@ -162,11 +166,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
     })
   ).json();
 
+  const total: number = Object.values<number>(languages).reduce(
+    (a, b) => a + b
+  );
+  const validLanguages = Object.fromEntries(
+    Object.entries<number>(languages).filter(
+      ([key, value]) => value / total > 0.05
+    )
+  );
   return {
     props: {
       repo,
       readme,
-      languages,
+      total: Object.values<number>(validLanguages).reduce((a, b) => a + b),
+      languages: validLanguages,
       name,
     },
     revalidate: 10 * 60 * 60,
