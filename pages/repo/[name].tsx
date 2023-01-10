@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
 const id = ({
   repo,
@@ -52,11 +51,14 @@ const id = ({
         <p>
           <span className="inline-block mr-1">Homepage: </span>
           {repo.homepage ? (
-            <Link href={repo.homepage}>
-              <a className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-                {repo.homepage}
-              </a>
-            </Link>
+            <a
+              href={repo.homepage}
+              target="_blank"
+              className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+              rel="noreferrer"
+            >
+              {repo.homepage}
+            </a>
           ) : (
             "None"
           )}
@@ -65,11 +67,14 @@ const id = ({
         <p>{new Date(repo.updated_at).toDateString()}</p>
         <p className="">
           Repository:{" "}
-          <Link href={repo.html_url}>
-            <a className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-              {repo.html_url}
-            </a>
-          </Link>
+          <a
+            href={repo.html_url}
+            target="_blank"
+            className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            rel="noreferrer"
+          >
+            {repo.html_url}
+          </a>
         </p>
       </div>
     </div>

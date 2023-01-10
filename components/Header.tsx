@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import { repo } from "../helpers/getInfo";
 
 const Header = ({
@@ -11,7 +10,6 @@ const Header = ({
   repos: repo[];
   currentRepo?: string;
 }) => {
-  const [isOpen, setOpen] = useState(false);
   return (
     <div className="mb-1 w-full bg-purple-800 p-3 overflow-hidden text-white h-14">
       <h3 className="text-xl inline">

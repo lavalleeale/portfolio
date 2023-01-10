@@ -1,55 +1,86 @@
 /* eslint-disable camelcase */
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import { getInfo } from "../helpers/getInfo";
 
-export default function Home({ repos, languages, name }) {
+export default function Home({ name }) {
   return (
     <div>
       <Head>
         <meta name="description" content={`${name}'s Coding Portfolio`} />
         <title>Github Portfolio</title>
       </Head>
-      {repos.map((repo, index) => (
-        <Link href={`/repo/${repo.name}`} key={repo.id}>
-          <a>
-            <div className="paper">
-              <h5 className="text-xl">{repo.name}</h5>
-              <p color="textSecondary">
-                Languages:{" "}
-                {Object.keys(languages[index]).slice(0, 3).join(", ")}
-              </p>
-            </div>
+      <div className="paper">
+        <h1 className="uppercase text-3xl">About the portfolio</h1>
+        Hey there, welcome to {name}&apos;s Coding Portfolio! If you&apos;ve
+        already navigated around a little you might have noticed that this
+        portfolio itself is featured inside itself (
+        <Link href={"/repo/portfolio"}>
+          <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
+            Here
           </a>
         </Link>
-      ))}
+        ). Every page on this portfolio (except this one!) is automatically
+        generated from all of my public github repositories so it always has my
+        latest and greatest work.
+      </div>
+      <div className="paper">
+        <h1 className="uppercase text-3xl">About me</h1>
+        Hi, I&apos;m am Alex Lavallee and I am current a student going to
+        Charles Wright Academy in Tacoma, WA and I am very interested in
+        computer science. The current languages that I am interested in include
+        C#, TypeScript, Python, and Swift. Some of my favorite technologies with
+        these langauges are Unity, NextJS, Flask, and SwiftUI.
+      </div>
+      <div className="w-full p-1 bg-slate-200 -z-10 filter">
+        <div className="grid grid-cols-4 align-middle">
+          <div className="col-span-3  inline-block">
+            <div className="aspect-[2940/475] relative">
+              <Link href="/repo/Lambda" passHref>
+                <a>
+                  <Image src="/collage/lambda.png" alt="" layout="fill" />
+                </a>
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 pt-1 gap-1">
+              <div className="aspect-[2940/1626] relative">
+                <Link href="/repo/portfolio" passHref>
+                  <a>
+                    <Image src="/collage/portfolio.png" alt="" layout="fill" />
+                  </a>
+                </Link>
+              </div>
+              <div className="aspect-[2166/1198] relative">
+                <Link href="/repo/Stack" passHref>
+                  <a>
+                    <Image src="/collage/stack.png" alt="" layout="fill" />
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="aspect-[1222/1616] relative inline-block">
+            <Link href="/repo/tetris" passHref>
+              <a>
+                <Image src="/collage/tetris.png" alt="" layout="fill" />
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
   const info = await getInfo();
-  const languages = await Promise.all(
-    info.repos.map(async (repo) =>
-      (
-        await fetch(repo.languages_url, {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-            Authorization: `Token ${process.env.PAT}`,
-          },
-        })
-      ).json()
-    )
-  );
 
   return {
     props: {
-      repos: info.repos.map((repo) => ({ id: repo.id, name: repo.name })),
-      languages,
       name: info.name,
     },
-    revalidate: 10 * 60 * 60,
   };
 };
 
@@ -58,13 +89,5 @@ export const config = {
 };
 
 Home.propTypes = {
-  repos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      language: PropTypes.string,
-    })
-  ).isRequired,
-  languages: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)).isRequired,
   name: PropTypes.string.isRequired,
 };
