@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://portfolio.alextesting.ninja",
+  siteUrl: "https://portfolio.lavallee.one",
   generateRobotsTxt: true, // (optional)
   // ...other options
 };

@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import { getInfo } from "../helpers/getInfo";
+import lambdaPic from "../public/collage/lambda.png";
+import portfolioPic from "../public/collage/portfolio.png";
+import stackPic from "../public/collage/stack.png";
+import tetrisPic from "../public/collage/tetris.png";
 
 export default function Home({ name }) {
   return (
@@ -41,7 +45,7 @@ export default function Home({ name }) {
             <div className="aspect-[2940/475] relative">
               <Link href="/repo/Lambda" passHref>
                 <a>
-                  <Image src="/collage/lambda.png" alt="" layout="fill" />
+                  <Image src={lambdaPic} alt="" layout="fill" />
                 </a>
               </Link>
             </div>
@@ -49,14 +53,14 @@ export default function Home({ name }) {
               <div className="aspect-[2940/1626] relative">
                 <Link href="/repo/portfolio" passHref>
                   <a>
-                    <Image src="/collage/portfolio.png" alt="" layout="fill" />
+                    <Image src={portfolioPic} alt="" layout="fill" />
                   </a>
                 </Link>
               </div>
               <div className="aspect-[2166/1198] relative">
                 <Link href="/repo/Stack" passHref>
                   <a>
-                    <Image src="/collage/stack.png" alt="" layout="fill" />
+                    <Image src={stackPic} alt="" layout="fill" />
                   </a>
                 </Link>
               </div>
@@ -65,7 +69,7 @@ export default function Home({ name }) {
           <div className="aspect-[1222/1616] relative inline-block">
             <Link href="/repo/tetris" passHref>
               <a>
-                <Image src="/collage/tetris.png" alt="" layout="fill" />
+                <Image src={tetrisPic} alt="" layout="fill" />
               </a>
             </Link>
           </div>
@@ -84,9 +88,9 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export const config = {
-  unstable_runtimeJS: false,
-};
+// export const config = {
+//   unstable_runtimeJS: false,
+// };
 
 Home.propTypes = {
   name: PropTypes.string.isRequired,
