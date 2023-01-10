@@ -42,7 +42,7 @@ export default function Home({ name }) {
       <div className="w-full p-1 bg-slate-200 -z-10 filter">
         <div className="grid grid-cols-4 align-middle">
           <div className="col-span-3  inline-block">
-            <div className="aspect-[2940/475] relative">
+            <div className="aspect-[2940/475] relative hover:z-50 hover:scale-110 transition-transform">
               <Link href="/repo/Lambda" passHref>
                 <a>
                   <Image src={lambdaPic} alt="" layout="fill" />
@@ -50,14 +50,14 @@ export default function Home({ name }) {
               </Link>
             </div>
             <div className="grid grid-cols-2 pt-1 gap-1">
-              <div className="aspect-[2940/1626] relative">
+              <div className="aspect-[2940/1626] relative hover:z-50 hover:scale-110 transition-transform">
                 <Link href="/repo/portfolio" passHref>
                   <a>
                     <Image src={portfolioPic} alt="" layout="fill" />
                   </a>
                 </Link>
               </div>
-              <div className="aspect-[2166/1198] relative">
+              <div className="aspect-[2166/1198] relative hover:z-50 hover:scale-110 transition-transform">
                 <Link href="/repo/Stack" passHref>
                   <a>
                     <Image src={stackPic} alt="" layout="fill" />
@@ -66,7 +66,7 @@ export default function Home({ name }) {
               </div>
             </div>
           </div>
-          <div className="aspect-[1222/1616] relative inline-block">
+          <div className="aspect-[1222/1616] relative inline-block hover:z-50 hover:scale-110 transition-transform">
             <Link href="/repo/tetris" passHref>
               <a>
                 <Image src={tetrisPic} alt="" layout="fill" />
