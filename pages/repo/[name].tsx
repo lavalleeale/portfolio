@@ -25,13 +25,13 @@ const id = ({
       <meta name="description" content={`${name}'s ${repo.name}`} />
       <title>{repo.name}</title>
     </Head>
-    <div className="paper">
-      <h1 className="text-3xl">{repo.name}</h1>
-    </div>
     <div className="grid sm:grid-cols-4">
       <div className="paper col-span-3 hidden sm:block">
         {/* eslint-disable-next-line react/no-danger */}
-        <div dangerouslySetInnerHTML={{ __html: readme }} />
+        <div
+          className="markdown-body"
+          dangerouslySetInnerHTML={{ __html: readme }}
+        />
       </div>
       <div className="paper">
         <p className="inline-block mr-1">
@@ -54,7 +54,7 @@ const id = ({
             <a
               href={repo.homepage}
               target="_blank"
-              className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+              className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800"
               rel="noreferrer"
             >
               {repo.homepage}
@@ -70,7 +70,7 @@ const id = ({
           <a
             href={repo.html_url}
             target="_blank"
-            className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            className="overflow-ellipsis block overflow-hidden underline text-blue-600 hover:text-blue-800"
             rel="noreferrer"
           >
             {repo.html_url}

@@ -1,0 +1,12 @@
+const Footer = () => {
+  return (
+    <footer className="pt-1 fixed bottom-0 w-full bg-purple-800 p-3 text-white">
+      <a className="float-right underline" href="mailto:alex@lavallee.one">
+        Contact Me
+      </a>
+      <p>&copy;Alex Lavallee</p>
+    </footer>
+  );
+};
+
+export default Footer;

@@ -6,6 +6,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { getInfo, repo } from "../helpers/getInfo";
 
@@ -30,6 +31,7 @@ export default class MyDocument extends Document<{
             currentRepo={this.props.currentRepo}
           />
           <Main />
+          <Footer />
           <NextScript />
         </body>
       </Html>
