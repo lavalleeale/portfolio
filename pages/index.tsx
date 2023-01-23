@@ -74,9 +74,9 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export const config = {
-  unstable_runtimeJS: false,
-};
+// export const config = {
+//   unstable_runtimeJS: false,
+// };
 
 Home.propTypes = {
   name: PropTypes.string.isRequired,
