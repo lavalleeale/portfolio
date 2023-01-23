@@ -16,7 +16,7 @@ export default function Home({ name }) {
         <title>Github Portfolio</title>
       </Head>
       <div className="grid grid-cols-2">
-        <div className="paper">
+        <div className="paper col-span-2 lg:col-span-1">
           <h1 className="uppercase text-3xl">About me</h1>
           Hi, I&apos;m am Alex Lavallee and I am current a student going to
           Charles Wright Academy in Tacoma, WA and I am very interested in
@@ -25,12 +25,12 @@ export default function Home({ name }) {
           technologies with these langauges are Unity, NextJS, Flask, and
           SwiftUI.
         </div>
-        <div className="paper">
+        <div className="paper hidden lg:block">
           <div className="relative aspect-[3/4] w-1/4 m-auto">
             <Image src={headshotPic} alt="" layout="fill" />
           </div>
         </div>
-        <div className="paper">
+        <div className="paper col-span-2 lg:col-span-1">
           <h1 className="uppercase text-3xl">My Projects</h1>
           If you&apos;ve already navigated around a little you might have
           noticed that this portfolio itself is featured inside itself (
@@ -59,7 +59,9 @@ export default function Home({ name }) {
           (SSH certificate authority using Typescript and Go to allow secure
           temporary access to needed servers)
         </div>
-        <Collage />
+        <div className="paper col-span-2 lg:col-span-1">
+          <Collage />
+        </div>
       </div>
     </div>
   );

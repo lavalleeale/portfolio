@@ -21,7 +21,7 @@ const Header = ({
         Menu
       </label>
       <input id="menu" className="hidden peer" type="checkbox" />
-      <div className="hidden peer-checked:block absolute w-full backdrop-blur-sm bg-slate-500/70 h-[calc(100%-3.5rem)] bottom-0 left-0 text-center">
+      <div className="z-50 hidden peer-checked:block absolute w-full backdrop-blur-sm bg-slate-500/70 h-[calc(100%-3.5rem)] bottom-0 left-0 text-center">
         {repos.map((repo) => (
           <Link key={repo.id} href={`/repo/${repo.name}`}>
             <a
