@@ -8,11 +8,11 @@ import Document, {
 } from "next/document";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { getInfo, repo } from "../helpers/getInfo";
+import { basicRepo, getInfo } from "../helpers/getInfo";
 
 export default class MyDocument extends Document<{
   name: string;
-  repos: repo[];
+  repos: basicRepo[];
   currentRepo?: string;
 }> {
   static getInitialProps = async (ctx: DocumentContext) => {
@@ -24,13 +24,15 @@ export default class MyDocument extends Document<{
     return (
       <Html>
         <Head />
-        <body className="bg-gray-50">
+        <body className="bg-gray-100">
           <Header
             name={this.props.name}
             repos={this.props.repos}
             currentRepo={this.props.currentRepo}
           />
-          <Main />
+          <div className="mb-12">
+            <Main />
+          </div>
           <Footer />
           <NextScript />
         </body>

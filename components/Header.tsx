@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { repo } from "../helpers/getInfo";
+import { basicRepo } from "../helpers/getInfo";
 
 const Header = ({
   name,
@@ -7,7 +7,7 @@ const Header = ({
   currentRepo,
 }: {
   name: string;
-  repos: repo[];
+  repos: basicRepo[];
   currentRepo?: string;
 }) => {
   return (

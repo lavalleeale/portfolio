@@ -8,7 +8,10 @@ import Collage from "../components/Collage";
 import { getInfo } from "../helpers/getInfo";
 import headshotPic from "../public/headshot.png";
 
-export default function Home({ name }) {
+type HomeProps = {
+  name: string;
+};
+export default function Home({ name }: HomeProps) {
   return (
     <div>
       <Head>
@@ -66,19 +69,15 @@ export default function Home({ name }) {
     </div>
   );
 }
-export const getStaticProps: GetStaticProps = async () => {
-  const info = await getInfo();
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const { name } = await getInfo();
 
   return {
     props: {
-      name: info.name,
+      name,
     },
   };
 };
-
-// export const config = {
-//   unstable_runtimeJS: false,
-// };
 
 Home.propTypes = {
   name: PropTypes.string.isRequired,

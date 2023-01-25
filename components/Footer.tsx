@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="pt-1 fixed bottom-0 w-full bg-purple-800 p-3 text-white">
+    <footer className="fixed bottom-0 w-full bg-purple-800 p-3 text-white">
       <a className="float-right underline" href="mailto:alex@lavallee.one">
         Contact Me
       </a>
