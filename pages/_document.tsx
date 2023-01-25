@@ -24,7 +24,7 @@ export default class MyDocument extends Document<{
     return (
       <Html>
         <Head />
-        <body className="bg-gray-100">
+        <body className="bg-cyan-600">
           <Header
             name={this.props.name}
             repos={this.props.repos}

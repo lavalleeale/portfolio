@@ -10,7 +10,7 @@ const Project = ({
   readme: string;
 }) => {
   return (
-    <div className="grid sm:grid-cols-4">
+    <div className="grid sm:grid-cols-4 gap-3">
       <div className="paper col-span-3 hidden sm:block">
         {/* eslint-disable-next-line react/no-danger */}
         <div

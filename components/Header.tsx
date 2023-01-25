@@ -23,7 +23,7 @@ const Header = ({
       <input id="menu" className="hidden peer" type="checkbox" />
       <div className="z-50 hidden peer-checked:block absolute w-full backdrop-blur-sm bg-slate-500/70 h-[calc(100%-3.5rem)] bottom-0 left-0 text-center">
         {repos.map((repo) => (
-          <Link key={repo.id} href={`/repo/${repo.name}`}>
+          <Link key={repo.id} href={`/#${repo.name}`}>
             <a
               className={
                 currentRepo === repo.name
@@ -38,7 +38,7 @@ const Header = ({
       </div>
       <div className="hidden header:inline">
         {repos.map((repo) => (
-          <Link key={repo.id} href={`/repo/${repo.name}`}>
+          <Link key={repo.id} href={`/#${repo.name}`}>
             <a
               className={currentRepo === repo.name ? "ml-6 font-bold" : "ml-6"}
             >
