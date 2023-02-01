@@ -11,13 +11,14 @@ import headshotPic from "../public/headshot.png";
 
 type HomeProps = {
   name: string;
+  order: string;
   repos: {
     repo: fullRepo;
     readme: string;
     languages: string[];
   }[];
 };
-export default function Home({ name, repos }: HomeProps) {
+export default function Home({ name, repos, order }: HomeProps) {
   return (
     <div>
       <Head>
@@ -77,17 +78,23 @@ export default function Home({ name, repos }: HomeProps) {
             <Collage />
           </div>
         </div>
-        {repos.map((repo) => (
-          <>
-            <a id={repo.repo.name} />
-            <Project
-              key={repo.repo.name}
-              languages={repo.languages}
-              readme={repo.readme}
-              repo={repo.repo}
-            />
-          </>
-        ))}
+        {repos
+          .sort(
+            (a, b) =>
+              order.split(" ").indexOf(a.repo.name) -
+              order.split(" ").indexOf(b.repo.name)
+          )
+          .map((repo) => (
+            <>
+              <a id={repo.repo.name} />
+              <Project
+                key={repo.repo.name}
+                languages={repo.languages}
+                readme={repo.readme}
+                repo={repo.repo}
+              />
+            </>
+          ))}
       </div>
     </div>
   );
@@ -97,6 +104,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
   return {
     props: {
+      order: process.env.ORDER,
       name,
       repos: await Promise.all(
         repos.map(async (repo) => await getRepoInfo(repo))

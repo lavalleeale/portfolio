@@ -37,15 +37,23 @@ const Header = ({
         ))}
       </div>
       <div className="hidden header:inline">
-        {repos.map((repo) => (
-          <Link key={repo.id} href={`/#${repo.name}`}>
-            <a
-              className={currentRepo === repo.name ? "ml-6 font-bold" : "ml-6"}
-            >
-              {repo.name}
-            </a>
-          </Link>
-        ))}
+        {repos
+          .sort(
+            (a, b) =>
+              process.env.ORDER.split(" ").indexOf(a.name) -
+              process.env.ORDER.split(" ").indexOf(b.name)
+          )
+          .map((repo) => (
+            <Link key={repo.id} href={`/#${repo.name}`}>
+              <a
+                className={
+                  currentRepo === repo.name ? "ml-6 font-bold" : "ml-6"
+                }
+              >
+                {repo.name}
+              </a>
+            </Link>
+          ))}
       </div>
     </div>
   );
