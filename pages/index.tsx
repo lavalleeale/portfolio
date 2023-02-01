@@ -44,7 +44,7 @@ export default function Home({ name, repos }: HomeProps) {
             <h1 className="uppercase text-3xl">My Projects</h1>
             If you&apos;ve already navigated around a little you might have
             noticed that this portfolio itself is featured inside itself (
-            <Link href={"/repo/portfolio"}>
+            <Link href="#portfolio">
               <a className="underline text-blue-600 hover:text-blue-800">
                 Here
               </a>
@@ -53,19 +53,19 @@ export default function Home({ name, repos }: HomeProps) {
             generated from all of my public Github repositories so it always has
             my latest and greatest work. Some other projects that I am very
             proud of are{" "}
-            <Link href={"/repo/Lambda"}>
+            <Link href="#Lambda">
               <a className="underline text-blue-600 hover:text-blue-800">
                 Lambda
               </a>
             </Link>{" "}
             (Social media site using NextJS similar to Reddit),{" "}
-            <Link href={"/repo/Lambda"}>
+            <Link href="#AutomationGame">
               <a className="underline text-blue-600 hover:text-blue-800">
                 AutomationGame
               </a>
             </Link>{" "}
             (Game made with Unity similar to Factorio), and{" "}
-            <Link href={"/repo/Lambda"}>
+            <Link href="#sshca">
               <a className="underline text-blue-600 hover:text-blue-800">
                 SSHCA
               </a>

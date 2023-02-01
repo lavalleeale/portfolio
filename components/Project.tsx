@@ -11,14 +11,14 @@ const Project = ({
 }) => {
   return (
     <div className="grid sm:grid-cols-4 gap-3">
-      <div className="paper col-span-3 hidden sm:block">
+      <div className="paper sm:col-span-3">
         {/* eslint-disable-next-line react/no-danger */}
         <div
           className="markdown-body"
           dangerouslySetInnerHTML={{ __html: readme }}
         />
       </div>
-      <div className="paper">
+      <div className="paper hidden sm:block">
         <p>License: {repo.license ? repo.license.name : "None"}</p>
         <p>
           <span className="inline-block mr-1">Homepage: </span>
