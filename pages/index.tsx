@@ -44,7 +44,7 @@ export default function Home({ name, repos, order }: HomeProps) {
           <div className="paper col-span-2 lg:col-span-1">
             <h1 className="uppercase text-3xl">My Projects</h1>
             If you&apos;ve already navigated around a little you might have
-            noticed that this portfolio itself is featured inside itself (
+            noticed that this portfolio is featured inside itself (
             <Link href="#portfolio">
               <a className="underline text-blue-600 hover:text-blue-800">
                 Here
