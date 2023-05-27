@@ -51,7 +51,8 @@ export const getInfo = async () => {
           (repo) =>
             repo.owner.login === repos_urls[index].login &&
             !repo.private &&
-            repo.name !== login
+            repo.name !== login &&
+            process.env.ORDER.split(" ").includes(repo.name)
         )
       )
       .flat(),
