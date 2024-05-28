@@ -90,7 +90,7 @@ export const getRepoInfo = async ({
     const readmeFile = await (
       await fetch(readmeData.download_url, {
         headers: {
-          Accept: "application/vnd.github.v3+json",
+          Accept: "application/vnd.github.html",
           Authorization: `Token ${process.env.PAT}`,
         },
       })

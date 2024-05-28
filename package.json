@@ -15,11 +15,13 @@
     "next": "12",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
+    "@types/showdown": "^2.0.6",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "autoprefixer": "^10.4.2",
@@ -31,6 +33,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gray-matter": "^4.0.3",
     "netlify-cli": "^3.13.0",
     "next-sitemap": "^1.5.18",
     "postcss": "^8.4.6",
