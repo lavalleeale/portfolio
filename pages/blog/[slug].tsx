@@ -23,7 +23,10 @@ export default function Home({ post, name }: BlogItemProps) {
       <div className="w-3/4 !m-auto paper">
         <p className="float-right">{new Date(post.date).toLocaleString()}</p>
         <h2 className="text-3xl">{post.title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </div>
     </div>
   );
